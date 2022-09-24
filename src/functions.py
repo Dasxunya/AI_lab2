@@ -27,8 +27,18 @@ def file_function(filename):
 
     """Вывод результатов работы методов"""
     dfs_search = dfs(graph, start, end, visited)
-    print(color.PURPLE)
-    print(*dfs_search, sep='-->')
+    bfs_search = bfs(graph, start, end)
+    print('\nПоиск в глубину: ' + color.PURPLE)
+    print_list(dfs_search)
+    print(color.BLUE + 'Поиск в ширину: ' + color.PURPLE)
+    print_list(bfs_search)
+
+
+def print_list(l):
+    if l is None:
+        print('Такого пути нет')
+    else:
+        print(*l, sep=' --> ')
 
 
 def dfs(g, current, goal, visited):
@@ -44,3 +54,16 @@ def dfs(g, current, goal, visited):
                     path.insert(0, current)
                     return path
     return None
+
+
+def bfs(g, current, goal):
+    q = [[current]]
+    while q:
+        path = q.pop(0)
+        node = path[-1]
+        if node == goal:
+            return path
+        for n in g.get(node, []):
+            next_p = list(path)
+            next_p.append(n)
+            q.append(next_p)
