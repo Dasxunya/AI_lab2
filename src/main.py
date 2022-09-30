@@ -11,5 +11,5 @@ while True:
         exit(1)
     except FileNotFoundError:
         print(color.RED, "\n*Проверьте имя файла*")
-    # except:
-    #     print(color.RED, '\n*Что-то пошло не так :(*g')
+    except:
+        print(color.RED, '\n*Что-то пошло не так :(*')
